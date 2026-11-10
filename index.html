@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Fire Diamond TopUp</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #0f172a; color: #fff; padding: 20px; }
+        .container { max-width: 500px; margin: 0 auto; background: #1e293b; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        h2 { text-align: center; color: #f59e0b; margin-bottom: 20px; }
+        
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; }
+        input[type="text"], select { width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #334155; background: #0f172a; color: #fff; outline: none; }
+        
+        .packages { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 10px; }
+        .package-card { background: #334155; padding: 15px; border-radius: 8px; text-align: center; cursor: pointer; border: 2px solid transparent; transition: 0.3s; }
+        .package-card.active { border-color: #f59e0b; background: #475569; }
+        .package-card h4 { color: #38bdf8; }
+        .package-card p { font-size: 14px; margin-top: 5px; color: #cbd5e1; }
+        
+        .submit-btn { width: 100%; padding: 14px; background: #f59e0b; border: none; color: #000; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; margin-top: 10px; }
+        .submit-btn:hover { background: #d97706; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>💎 Free Fire Diamond TopUp</h2>
+    
+    <form id="topupForm">
+        <!-- Player UID Input -->
+        <div class="form-group">
+            <label for="playerUid">প্লেয়ার আইডি (Player UID)</label>
+            <input type="text" id="playerUid" placeholder="যেমন: 123456789" required>
+        </div>
+
+        <!-- Diamond Package Selection -->
+        <div class="form-group">
+            <label>প্যাকেজ নির্বাচন করুন</label>
+            <div class="packages">
+                <div class="package-card" onclick="selectPackage(this, '115 Diamonds', 80)">
+                    <h4>115 Diamonds</h4>
+                    <p>৳ 80</p>
+                </div>
+                <div class="package-card" onclick="selectPackage(this, '240 Diamonds', 160)">
+                    <h4>240 Diamonds</h4>
+                    <p>৳ 160</p>
+                </div>
+                <div class="package-card" onclick="selectPackage(this, 'Weekly Membership', 170)">
+                    <h4>Weekly</h4>
+                    <p>৳ 170</p>
+                </div>
+                <div class="package-card" onclick="selectPackage(this, 'Monthly Membership', 780)">
+                    <h4>Monthly</h4>
+                    <p>৳ 780</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Method Selection -->
+        <div class="form-group">
+            <label for="paymentMethod">পেমেন্ট মেথড</label>
+            <select id="paymentMethod" required>
+                <option value="">পেমেন্ট মেথড বেছে নিন</option>
+                <option value="bKash">bKash (Personal)</option>
+                <option value="Nagad">Nagad (Personal)</option>
+                <option value="Rocket">Rocket (Personal)</option>
+            </select>
+        </div>
+
+        <!-- Transaction ID Input -->
+        <div class="form-group">
+            <label for="trxId">ট্রানজেকশন আইডি (TrxID)</label>
+            <input type="text" id="trxId" placeholder="যেমন: 9J7X8K2L" required>
+        </div>
+
+        <button type="submit" class="submit-btn">অর্ডার সাবমিট করুন</button>
+    </form>
+</div>
+
+<script>
+    let selectedPkg = null;
+    let pkgPrice = 0;
+
+    function selectPackage(element, name, price) {
+        document.querySelectorAll('.package-card').forEach(card => card.classList.remove('active'));
+        element.classList.add('active');
+        selectedPkg = name;
+        pkgPrice = price;
+    }
+
+    document.getElementById('topupForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const uid = document.getElementById('playerUid').value;
+        const method = document.getElementById('paymentMethod').value;
+        const trx = document.getElementById('trxId').value;
+
+        if (!selectedPkg) {
+            alert('দয়া করে একটি প্যাকেজ সিলেক্ট করুন!');
+            return;
+        }
+
+        alert(`অর্ডার সফল হয়েছে!\nUID: ${uid}\nPackage: ${selectedPkg}\nAmount: ৳${pkgPrice}\nTrxID: ${trx}`);
+    });
+</script>
+
+</body>
+</html>
